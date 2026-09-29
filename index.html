@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bow Expressions tt | Handmade Luxury Hair Art</title>
+<meta name="description" content="Bespoke handmade bows, flower crowns, fascinators, corsages and boutonnieres for bridal and event style.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav glass" id="nav">
+  <a href="#home" class="logo">Bow Expressions <em>tt</em></a>
+  <nav aria-label="Main">
+    <a href="#home">Home</a>
+    <a href="#brand">The Brand</a>
+    <a href="#showroom">Masterpieces</a>
+    <a href="#commission">Bespoke Commission</a>
+  </nav>
+  <a href="#commission" class="btn btn-ghost">Request Consultation</a>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=2000&q=80" alt="Draped dark satin and floral details" loading="eager">
+    <div class="hero-veil"></div>
+    <div class="hero-copy">
+      <h1><span>Meticulously Handcrafted.</span> <span>Unapologetically Elegant.</span></h1>
+      <p>Bespoke hair art, sewn petal by petal, made to transform bridal and event style.</p>
+      <a href="#showroom" class="btn btn-rose">Enter the Showroom</a>
+    </div>
+    <a href="#brand" class="scroll" aria-label="Scroll down"><i></i></a>
+  </section>
+
+  <section class="craft" id="brand">
+    <div class="craft-text reveal">
+      <h2>Made by hand, one bow at a time.</h2>
+      <div class="cols">
+        <p>Every piece begins as a sketch and a swatch. Silks, satins and velvets are chosen for how they catch the light, then cut, folded and stitched by hand until the shape holds its own.</p>
+        <p>There are no moulds and no shortcuts. Each flower crown and fascinator is fitted to the wearer, so it sits exactly where it should and stays there all night.</p>
+      </div>
+      <p class="sign">Simply fabulous bows.</p>
+    </div>
+    <figure class="craft-img reveal">
+      <img src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1000&q=80" alt="Artisan studio workspace with ribbons and delicate tools" loading="lazy">
+      <figcaption class="glass">The studio, Trinidad &amp; Tobago</figcaption>
+    </figure>
+  </section>
+
+  <section class="showroom" id="showroom">
+    <h2 class="reveal">The Masterpiece Showroom</h2>
+    <div class="filters reveal" role="group" aria-label="Filter pieces">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="bows">Hair Bows</button>
+      <button data-filter="crowns">Flower Crowns</button>
+      <button data-filter="fascinators">Fascinators</button>
+      <button data-filter="corsages">Wrist Corsages</button>
+      <button data-filter="boutonnieres">Boutonnieres</button>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="commission" id="commission">
+    <div class="form-wrap glass reveal">
+      <h2>Bespoke Commission</h2>
+      <p class="lead">Tell us about your day. We will reply with sketches, fabrics and a quote.</p>
+      <form id="form" novalidate>
+        <div class="field"><input id="name" name="name" placeholder=" " required autocomplete="name"><label for="name">Client name</label></div>
+        <div class="field"><input id="email" name="email" type="email" placeholder=" " required autocomplete="email"><label for="email">Email</label></div>
+        <div class="field"><input id="wa" name="wa" type="tel" placeholder=" " required autocomplete="tel"><label for="wa">WhatsApp number</label></div>
+        <div class="field"><input id="date" name="date" type="date" placeholder=" " required><label for="date">Event date</label></div>
+        <div class="field"><select id="type" name="type" required><option value="" hidden></option><option>Wedding</option><option>Bridal Shower</option><option>Graduation</option><option>Gala or Formal Event</option><option>Photoshoot</option><option>Other</option></select><label for="type">Event type</label></div>
+        <div class="field"><select id="budget" name="budget" required><option value="" hidden></option><option>Under $100</option><option>$100 to $250</option><option>$250 to $500</option><option>$500+</option></select><label for="budget">Estimated budget</label></div>
+        <div class="field full"><textarea id="notes" name="notes" rows="4" placeholder=" "></textarea><label for="notes">Design concept notes</label></div>
+        <button type="submit" class="btn btn-rose full">Send Commission Request</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div>
+    <p class="logo">Bow Expressions <em>tt</em></p>
+    <p class="tag">Simply Fabulous Bows.</p>
+  </div>
+  <div>
+    <a href="mailto:hello@bowexpressionstt.com">hello@bowexpressionstt.com</a>
+    <a href="tel:+18680000000">+1 (868) 000-0000</a>
+    <a href="https://wa.me/18680000000">WhatsApp: +1 (868) 000-0000</a>
+  </div>
+  <div>
+    <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+  </div>
+  <p class="copy">&copy; <span id="yr"></span> Bow Expressions tt. Handmade in Trinidad &amp; Tobago.</p>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt" hidden>
+  <div class="modal-card glass">
+    <h3 id="mt">Your Bespoke Request Has Been Received.</h3>
+    <p>A Design Consultant Will Contact You Shortly.</p>
+    <button class="btn btn-ghost" id="close">Close</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
