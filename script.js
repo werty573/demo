@@ -146,7 +146,14 @@ if (canHover && !calm) {
 
 /* ---------- Mobile drawer ---------- */
 const burger = document.getElementById('burger');
-const drawer = document.getElementById('drawer');
+// The drawer is built from the capsule's own links, so no duplicate link markup lives in the HTML.
+const drawer = document.createElement('div');
+drawer.className = 'drawer';
+drawer.id = 'drawer';
+drawer.innerHTML = [...document.querySelectorAll('.nav nav a')]
+  .map((a, i) => `<a href="${a.getAttribute('href')}" style="--i:${i}">${a.textContent}</a>`).join('')
+  + '<a href="#commission" class="btn btn-solid" style="--i:4">Request Consultation</a>';
+document.body.appendChild(drawer);
 const setMenu = open => {
   document.body.classList.toggle('menu-open', open);
   burger.setAttribute('aria-expanded', String(open));

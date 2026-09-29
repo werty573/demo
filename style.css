@@ -43,7 +43,7 @@ section{position:relative;padding:clamp(5rem,12vw,10rem) var(--pad);overflow:hid
 .nav .btn{display:none;min-height:0;padding:.6rem 1.2rem;font-size:.75rem;white-space:nowrap}
 
 /* hero */
-.hero{min-height:100svh;display:flex;align-items:flex-end;padding-bottom:9rem;color:var(--bg-surface)}
+.hero{min-height:100svh;display:flex;align-items:flex-end;padding-top:7rem;padding-bottom:9rem;color:var(--bg-surface)}
 .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--brand-blush);animation:drift 30s ease-in-out infinite alternate}
 .hero-veil{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(26,26,26,.2),rgba(26,26,26,.85) 90%),linear-gradient(180deg,rgba(26,26,26,.5),transparent 35%,rgba(26,26,26,.5))}
 .hero-copy{position:relative;max-width:1200px;transform-origin:left bottom;transform:scale(var(--hs,1));opacity:var(--ho,1);will-change:transform,opacity}
@@ -126,7 +126,7 @@ form .btn{padding:1.1rem;font-size:.95rem}
 @keyframes pop{from{opacity:0;transform:scale(.9) translateY(20px)}}
 
 @media(min-width:640px){form{grid-template-columns:1fr 1fr}}
-@media(min-width:768px){.nav nav{display:flex;gap:1rem}.burger,.drawer{display:none}.row{grid-template-columns:1.1fr 1fr}.row.flip{grid-template-columns:1fr 1.1fr}.row.flip .ph{order:2}.row.flip .txt{padding-left:clamp(0rem,4vw,3rem)}.hero h1 span:last-child{padding-left:clamp(0rem,8vw,7rem)}}
+@media(min-width:768px){.nav nav{display:flex;gap:1rem}.row{grid-template-columns:1.1fr 1fr}.row.flip{grid-template-columns:1fr 1.1fr}.row.flip .ph{order:2}.row.flip .txt{padding-left:clamp(0rem,4vw,3rem)}.hero h1 span:last-child{padding-left:clamp(0rem,8vw,7rem)}}
 @media(min-width:1000px){.nav nav{gap:1.6rem}.nav .btn{display:inline-flex}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}.scale-h,.hero-copy,.watermark{transform:none!important}.card,[data-stagger]>*,.filters button{opacity:1;translate:0 0}}
 
@@ -159,3 +159,6 @@ body.menu-open{overflow:hidden}
   .card.tapped .over{opacity:1;transform:translateY(0)}
   .card.tapped h3{opacity:0}
 }
+
+/* desktop: capsule only (declared last so it always wins) */
+@media(min-width:768px){.burger,.drawer{display:none}}
