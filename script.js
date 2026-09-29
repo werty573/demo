@@ -79,13 +79,13 @@ function scrollCraft() {
   if (!calm) {
     // hero headline grows and fades across the first viewport
     const hp = Math.min(Math.max(y / vh, 0), 1);
-    heroCopy.style.setProperty('--hs', (1 + hp * 0.35).toFixed(3));
+    heroCopy.style.setProperty('--hs', (1 + hp * (innerWidth < 768 ? 0.1 : 0.35)).toFixed(3));
     heroCopy.style.setProperty('--ho', (1 - hp * 1.1).toFixed(3));
     // headings scale 0.8 -> 1.08 as they travel through the viewport
     scaleEls.forEach(el => {
       const r = el.getBoundingClientRect();
       const p = Math.min(Math.max(1 - r.top / (vh * 0.9), 0), 1);
-      el.style.setProperty('--s', (0.8 + p * 0.28).toFixed(3));
+      el.style.setProperty('--s', (0.85 + p * (innerWidth < 768 ? 0.15 : 0.28)).toFixed(3));
     });
     // watermarks slide horizontally with their section's own scroll percentage
     marks.forEach(el => {
@@ -144,14 +144,54 @@ if (canHover && !calm) {
   });
 }
 
+/* ---------- Mobile drawer ---------- */
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+const setMenu = open => {
+  document.body.classList.toggle('menu-open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  drawer.setAttribute('aria-hidden', String(!open));
+  drawer.inert = !open;
+};
+setMenu(false);
+burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+drawer.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+matchMedia('(min-width:768px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+/* ---------- Hero stardust ---------- */
+const dust = document.getElementById('dust');
+if (!calm) {
+  const n = innerWidth < 768 ? 14 : 32;
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement('span'), z = 2 + Math.random() * 4;
+    s.style.cssText = `left:${(Math.random() * 100).toFixed(1)}%;width:${z.toFixed(1)}px;height:${z.toFixed(1)}px;animation-duration:${(9 + Math.random() * 12).toFixed(1)}s;animation-delay:-${(Math.random() * 20).toFixed(1)}s`;
+    dust.appendChild(s);
+  }
+}
+
+/* ---------- Touch downgrade: in-view lift + tap-to-reveal ---------- */
+if (!canHover) {
+  const seen = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('seen', e.intersectionRatio > 0.6)), { threshold: [0, 0.6] });
+  cards.forEach(c => seen.observe(c));
+}
+
 /* ---------- Commission form ---------- */
 const form = document.getElementById('form');
 const notes = document.getElementById('notes');
 document.getElementById('yr').textContent = new Date().getFullYear();
-form.date.min = new Date().toISOString().split('T')[0];
+const labels = { bows: 'Hair Bows', crowns: 'Flower Crowns', fascinators: 'Fascinators', corsages: 'Wrist Corsages', boutonnieres: 'Boutonnieres' };
 grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
   const link = e.target.closest('[data-style]');
-  if (link) notes.value = `I would like a piece inspired by "${link.dataset.style}". `;
+  if (link) {
+    form.product.value = labels[card.dataset.cat];
+    notes.value = `I would like a piece inspired by "${link.dataset.style}". `;
+    form.product.dispatchEvent(new Event('input', { bubbles: true }));
+  } else if (!canHover && card) {
+    cards.forEach(c => { if (c !== card) c.classList.remove('tapped'); });
+    card.classList.toggle('tapped');
+  }
 });
 form.addEventListener('submit', e => {
   e.preventDefault();
@@ -161,9 +201,19 @@ form.addEventListener('submit', e => {
     input.parentElement.classList.toggle('err', !valid);
     if (!valid && ok) { input.focus(); ok = false; }
   });
-  if (ok) openModal();
+  if (ok) { prepareEmail(); openModal(); }
 });
 form.addEventListener('input', e => e.target.parentElement.classList.remove('err'));
+
+
+/* Gather the request and prepare an email draft */
+function prepareEmail() {
+  const d = Object.fromEntries(new FormData(form));
+  const body = `Name: ${d.name}\nEmail: ${d.email}\nWhatsApp / Phone: ${d.wa}\nProduct: ${d.product}\n\nStyle notes:\n${d.notes}`;
+  mailLink.href = `mailto:hello@auraatelier.com?subject=${encodeURIComponent('Bespoke Request: ' + d.product)}&body=${encodeURIComponent(body)}`;
+  console.info('Bespoke request ready', d);
+}
+const mailLink = document.getElementById('mailLink');
 
 /* ---------- Confirmation modal ---------- */
 const modal = document.getElementById('modal');
